@@ -56,5 +56,13 @@ namespace WindowsFormsApp1
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             textBox1.Text = entry.Entry;
         }
+
+        private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            LogEntry entry = listBox1.SelectedItem as LogEntry;
+            db.Delete<LogEntry>(entry.Id);
+            getAllLogEntries(db);
+        }
     }
 }
