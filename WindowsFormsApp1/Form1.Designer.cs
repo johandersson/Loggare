@@ -32,9 +32,10 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.txtBoxLog = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.taBortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.kopieraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,22 @@
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kopieraToolStripMenuItem,
+            this.taBortToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // taBortToolStripMenuItem
+            // 
+            this.taBortToolStripMenuItem.Name = "taBortToolStripMenuItem";
+            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.taBortToolStripMenuItem.Text = "Ta bort";
+            this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(198, 238);
@@ -76,19 +93,12 @@
             this.textBox1.Size = new System.Drawing.Size(224, 95);
             this.textBox1.TabIndex = 3;
             // 
-            // contextMenuStrip1
+            // kopieraToolStripMenuItem
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.taBortToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(112, 26);
-            // 
-            // taBortToolStripMenuItem
-            // 
-            this.taBortToolStripMenuItem.Name = "taBortToolStripMenuItem";
-            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.taBortToolStripMenuItem.Text = "Ta bort";
-            this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
+            this.kopieraToolStripMenuItem.Name = "kopieraToolStripMenuItem";
+            this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.kopieraToolStripMenuItem.Text = "Kopiera till urklipp";
+            this.kopieraToolStripMenuItem.Click += new System.EventHandler(this.kopieraToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -115,6 +125,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem taBortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kopieraToolStripMenuItem;
     }
 }
 

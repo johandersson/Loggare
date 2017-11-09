@@ -64,5 +64,16 @@ namespace WindowsFormsApp1
             db.Delete<LogEntry>(entry.Id);
             getAllLogEntries(db);
         }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void kopieraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogEntry entry = listBox1.SelectedItem as LogEntry;
+            System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
+        }
     }
 }
