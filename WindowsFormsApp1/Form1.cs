@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
@@ -17,6 +19,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             var db = new SQLiteConnection("diary");
             db.CreateTable<LogEntry>();
+            comboBox1.SelectedIndex = 0;
             UpdateListBoxWithAllLogEntries(db);
 
         }
@@ -78,11 +81,7 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
-            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-            DateTime yesterDay = someDaysAgo(1);
-            List<LogEntry> filteredList = filterDates(l, yesterDay);
-            listBox1.DataSource = filteredList;
+          
         }
 
         private static List<LogEntry> filterDates(List<LogEntry> l, DateTime day)
@@ -92,11 +91,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
-            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-            DateTime threeDaysAgo = someDaysAgo(3);
-            List<LogEntry> filteredList = filterDates(l, threeDaysAgo);
-            listBox1.DataSource = filteredList;
+          
         }
 
         private static DateTime someDaysAgo(int ago)
@@ -110,6 +105,37 @@ namespace WindowsFormsApp1
         {
             var db = new SQLiteConnection("diary");
             UpdateListBoxWithAllLogEntries(db);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            List<LogEntry> filteredList;
+
+            switch (comboBox1.SelectedItem.ToString().Trim())
+            {
+                case "Idag":
+                    filteredList = filterDates(allLogEntries, DateTime.Now.Date);
+                    listBox1.DataSource = filteredList;
+                    break;
+
+                case "Igår":
+                    DateTime yesterDay = someDaysAgo(1);
+                    filteredList = filterDates(allLogEntries, yesterDay);
+                    listBox1.DataSource = filteredList;
+                    break;
+
+                case "3 dagar sen":
+                    DateTime threeDaysAgo = someDaysAgo(3);
+                    filteredList = filterDates(allLogEntries, threeDaysAgo);
+                    listBox1.DataSource = filteredList;
+                    break;
+
+                default:
+                    UpdateListBoxWithAllLogEntries(db);
+                    break;
+            }
         }
     }
 }
