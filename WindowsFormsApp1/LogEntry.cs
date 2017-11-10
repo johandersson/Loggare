@@ -12,13 +12,13 @@ namespace WindowsFormsApp1
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
-        public String Time { get; set; }
+        public DateTime Time { get; set; }
         public String Entry { get; set; }
 
 
         public override string ToString()
         {
-            return Time;
+            return Time.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }

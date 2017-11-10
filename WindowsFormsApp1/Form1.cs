@@ -17,11 +17,11 @@ namespace WindowsFormsApp1
             InitializeComponent();
             var db = new SQLiteConnection("diary");
             db.CreateTable<LogEntry>();
-            getAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries(db);
 
         }
 
-        private void getAllLogEntries(SQLiteConnection db)
+        private void UpdateListBoxWithAllLogEntries(SQLiteConnection db)
         {
             List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
             listBox1.DataSource = l;
@@ -34,11 +34,11 @@ namespace WindowsFormsApp1
             var Id = db.Insert(new LogEntry()
             {
                 Entry = s,
-                Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                Time = DateTime.Now
             });
            
             txtBoxLog.Text = "";
-            getAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries(db);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
             var db = new SQLiteConnection("diary");
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             db.Delete<LogEntry>(entry.Id);
-            getAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries(db);
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -74,6 +74,42 @@ namespace WindowsFormsApp1
         {
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            DateTime yesterDay = someDaysAgo(1);
+            List<LogEntry> filteredList = filterDates(l, yesterDay);
+            listBox1.DataSource = filteredList;
+        }
+
+        private static List<LogEntry> filterDates(List<LogEntry> l, DateTime day)
+        {
+            return l.Where(item => item.Time.Date.CompareTo(day.Date) == 0).ToList();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            DateTime threeDaysAgo = someDaysAgo(3);
+            List<LogEntry> filteredList = filterDates(l, threeDaysAgo);
+            listBox1.DataSource = filteredList;
+        }
+
+        private static DateTime someDaysAgo(int ago)
+        {
+            DateTime today = DateTime.Now;
+            DateTime someDaysAgo = today.AddDays(-ago);
+            return someDaysAgo;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            UpdateListBoxWithAllLogEntries(db);
         }
     }
 }
