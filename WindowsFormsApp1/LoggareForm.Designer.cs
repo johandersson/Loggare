@@ -37,13 +37,14 @@
             this.taBortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(263, 202);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Location = new System.Drawing.Point(461, 202);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
             this.btnSave.TabIndex = 0;
@@ -53,13 +54,13 @@
             // 
             // txtBoxLog
             // 
-            this.txtBoxLog.Font = new System.Drawing.Font("Gentium Book Basic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxLog.Font = new System.Drawing.Font("Gentium Book Basic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxLog.Location = new System.Drawing.Point(16, 15);
-            this.txtBoxLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxLog.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxLog.Multiline = true;
             this.txtBoxLog.Name = "txtBoxLog";
             this.txtBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxLog.Size = new System.Drawing.Size(345, 179);
+            this.txtBoxLog.Size = new System.Drawing.Size(545, 179);
             this.txtBoxLog.TabIndex = 1;
             this.txtBoxLog.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -69,9 +70,9 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(16, 293);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(237, 116);
+            this.listBox1.Size = new System.Drawing.Size(228, 116);
             this.listBox1.TabIndex = 2;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -101,13 +102,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(264, 293);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Font = new System.Drawing.Font("Gentium Book Basic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(252, 293);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(297, 116);
+            this.textBox1.Size = new System.Drawing.Size(309, 116);
             this.textBox1.TabIndex = 3;
             // 
             // comboBox1
@@ -118,24 +120,34 @@
             "Idag ",
             "Igår",
             "3 dagar sen"});
-            this.comboBox1.Location = new System.Drawing.Point(16, 431);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Location = new System.Drawing.Point(84, 261);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 24);
             this.comboBox1.TabIndex = 7;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 264);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Visa:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 491);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.txtBoxLog);
             this.Controls.Add(this.btnSave);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Loggare";
             this.contextMenuStrip1.ResumeLayout(false);
@@ -154,6 +166,7 @@
         private System.Windows.Forms.ToolStripMenuItem taBortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kopieraToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
