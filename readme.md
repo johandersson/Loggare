@@ -6,3 +6,5 @@ Enkelt Windows-program skrivet i C# för att göra enkla logg-anteckningar. Anv�
 ![Skärmbild](/images/screenshot.JPG?raw=true "Skärmbild av Loggare")
 
 
+Licens: GPL 3
+
