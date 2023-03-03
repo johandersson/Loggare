@@ -43,7 +43,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(461, 202);
+            this.btnSave.Location = new System.Drawing.Point(461, 194);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
@@ -60,7 +60,7 @@
             this.txtBoxLog.Multiline = true;
             this.txtBoxLog.Name = "txtBoxLog";
             this.txtBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBoxLog.Size = new System.Drawing.Size(545, 179);
+            this.txtBoxLog.Size = new System.Drawing.Size(545, 171);
             this.txtBoxLog.TabIndex = 1;
             this.txtBoxLog.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -124,7 +124,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(578, 15);
+            this.monthCalendar1.Location = new System.Drawing.Point(574, 15);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 9;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 491);
+            this.ClientSize = new System.Drawing.Size(901, 491);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
