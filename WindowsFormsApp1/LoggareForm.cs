@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
             var db = new SQLiteConnection("diary");
             db.CreateTable<LogEntry>();
-            comboBox1.SelectedIndex = 0;
+           
             UpdateListBoxWithAllLogEntries(db);
 
         }
@@ -109,36 +109,29 @@ namespace WindowsFormsApp1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
-            List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-            List<LogEntry> filteredList;
-
-            switch (comboBox1.SelectedItem.ToString().Trim())
-            {
-                case "Idag":
-                    filteredList = filterDates(allLogEntries, DateTime.Now.Date);
-                    listBox1.DataSource = filteredList;
-                    break;
-
-                case "Igår":
-                    DateTime yesterDay = someDaysAgo(1);
-                    filteredList = filterDates(allLogEntries, yesterDay);
-                    listBox1.DataSource = filteredList;
-                    break;
-
-                case "3 dagar sen":
-                    DateTime threeDaysAgo = someDaysAgo(3);
-                    filteredList = filterDates(allLogEntries, threeDaysAgo);
-                    listBox1.DataSource = filteredList;
-                    break;
-
-                default:
-                    UpdateListBoxWithAllLogEntries(db);
-                    break;
-            }
+            
         }
 
         private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+           
+                Console.WriteLine(monthCalendar1.SelectionStart);
+
+                var db = new SQLiteConnection("diary");
+                List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+                List<LogEntry> filteredList;
+                DateTime selectedDate = monthCalendar1.SelectionStart;
+                filteredList = filterDates(allLogEntries, selectedDate);
+                listBox1.DataSource = filteredList;
+            
+        }
+
+        private void label1_Click_2(object sender, EventArgs e)
         {
 
         }
