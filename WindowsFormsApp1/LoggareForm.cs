@@ -19,9 +19,22 @@ namespace WindowsFormsApp1
             InitializeComponent();
             var db = new SQLiteConnection("diary");
             db.CreateTable<LogEntry>();
-           
+            UpdateBoldedDates();
             UpdateListBoxWithAllLogEntries(db);
 
+        }
+
+        private void UpdateBoldedDates()
+        {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            List<DateTime> boldedDates = new List<DateTime>();
+            foreach (LogEntry logEntry in listWithAllLogEntries)
+            {
+                boldedDates.Add(logEntry.Time);
+            }
+            monthCalendar1.BoldedDates = boldedDates.ToArray();
         }
 
         private void UpdateListBoxWithAllLogEntries(SQLiteConnection db)
@@ -94,12 +107,6 @@ namespace WindowsFormsApp1
           
         }
 
-        private static DateTime someDaysAgo(int ago)
-        {
-            DateTime today = DateTime.Now;
-            DateTime someDaysAgo = today.AddDays(-ago);
-            return someDaysAgo;
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
