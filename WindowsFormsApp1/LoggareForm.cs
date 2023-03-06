@@ -88,9 +88,6 @@ namespace WindowsFormsApp1
             return l.Where(item => item.Time.Date.CompareTo(day.Date) == 0).ToList();
         }
 
-       
-
-
         private void button3_Click(object sender, EventArgs e)
         {
             var db = new SQLiteConnection("diary");
