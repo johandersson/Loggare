@@ -26,5 +26,5 @@ För att exportera alla loggar till en text-fil, klicka på Exportera alla, och 
 - Exportera bara ett visst datum.
 - Exportera till Word-fil.
 
-Licens: GPL 3
+Licens: MIT
 
