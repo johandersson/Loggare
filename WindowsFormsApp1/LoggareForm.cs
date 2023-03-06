@@ -39,8 +39,10 @@ namespace WindowsFormsApp1
 
         private void UpdateListBoxWithAllLogEntries(SQLiteConnection db)
         {
-            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-            listBox1.DataSource = l;
+            List<LogEntry> allLogentries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            DateTime selectedDate = monthCalendar1.SelectionStart;
+            var filteredList = filterDates(allLogentries, selectedDate);
+            listBox1.DataSource = filteredList;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace WindowsFormsApp1
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             LogEntry entry = listBox1.SelectedItem as LogEntry;
-            textBox1.Text = entry.Entry;
+            logEntryBox.Text = entry.Entry;
         }
 
         private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,7 +104,8 @@ namespace WindowsFormsApp1
                 List<LogEntry> filteredList;
                 DateTime selectedDate = monthCalendar1.SelectionStart;
                 filteredList = filterDates(allLogEntries, selectedDate);
-                listBox1.DataSource = filteredList;  
+                listBox1.DataSource = filteredList;
+                logEntryBox.Text = "";
         }
 
         private void button1_Click_1(object sender, EventArgs e)

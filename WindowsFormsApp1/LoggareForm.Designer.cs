@@ -35,7 +35,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.kopieraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taBortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.logEntryBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.button1 = new System.Windows.Forms.Button();
@@ -99,17 +99,17 @@
             this.taBortToolStripMenuItem.Text = "Ta bort";
             this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
             // 
-            // textBox1
+            // logEntryBox
             // 
-            this.textBox1.Font = new System.Drawing.Font("Gentium Book Basic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(252, 293);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(309, 116);
-            this.textBox1.TabIndex = 3;
+            this.logEntryBox.Font = new System.Drawing.Font("Gentium Book Basic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logEntryBox.Location = new System.Drawing.Point(252, 293);
+            this.logEntryBox.Margin = new System.Windows.Forms.Padding(4);
+            this.logEntryBox.Multiline = true;
+            this.logEntryBox.Name = "logEntryBox";
+            this.logEntryBox.ReadOnly = true;
+            this.logEntryBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logEntryBox.Size = new System.Drawing.Size(309, 116);
+            this.logEntryBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -145,7 +145,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.logEntryBox);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.txtBoxLog);
             this.Controls.Add(this.btnSave);
@@ -163,7 +163,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtBoxLog;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox logEntryBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem taBortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kopieraToolStripMenuItem;

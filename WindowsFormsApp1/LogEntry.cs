@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
 
         public string ExportToFileFormat()
         {
-            return ToString() + " " + Entry;
+            return ToString() + "\n" + Entry + "\n";
         }
     }
 }
