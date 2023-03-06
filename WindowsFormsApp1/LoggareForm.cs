@@ -123,5 +123,13 @@ namespace WindowsFormsApp1
             Process.Start(exportFileName);
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            LogEntry entry = listBox1.SelectedItem as LogEntry;
+            entry.Entry = logEntryBox.Text;
+            db.Update(entry);
+        }
     }
 }

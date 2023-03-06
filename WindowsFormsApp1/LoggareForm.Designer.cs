@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.button1 = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,14 +102,13 @@
             // 
             // logEntryBox
             // 
-            this.logEntryBox.Font = new System.Drawing.Font("Gentium Book Basic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logEntryBox.Font = new System.Drawing.Font("Gentium Book Basic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logEntryBox.Location = new System.Drawing.Point(252, 293);
             this.logEntryBox.Margin = new System.Windows.Forms.Padding(4);
             this.logEntryBox.Multiline = true;
             this.logEntryBox.Name = "logEntryBox";
-            this.logEntryBox.ReadOnly = true;
             this.logEntryBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logEntryBox.Size = new System.Drawing.Size(309, 116);
+            this.logEntryBox.Size = new System.Drawing.Size(577, 116);
             this.logEntryBox.TabIndex = 3;
             // 
             // label1
@@ -129,7 +129,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(700, 386);
+            this.button1.Location = new System.Drawing.Point(700, 224);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 10;
@@ -137,11 +137,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(749, 417);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Spara";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(901, 491);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
@@ -170,6 +181,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveButton;
     }
 }
 
