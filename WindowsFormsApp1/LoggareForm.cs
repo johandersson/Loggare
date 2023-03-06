@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -14,6 +13,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        private const string exportFileName = "export-loggar.txt";
+
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +22,6 @@ namespace WindowsFormsApp1
             db.CreateTable<LogEntry>();
             UpdateBoldedDates();
             UpdateListBoxWithAllLogEntries(db);
-
         }
 
         private void UpdateBoldedDates()
@@ -57,16 +57,7 @@ namespace WindowsFormsApp1
             UpdateListBoxWithAllLogEntries(db);
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+   
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             LogEntry entry = listBox1.SelectedItem as LogEntry;
@@ -79,11 +70,7 @@ namespace WindowsFormsApp1
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             db.Delete<LogEntry>(entry.Id);
             UpdateListBoxWithAllLogEntries(db);
-        }
-
-        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-
+            UpdateBoldedDates();
         }
 
         private void kopieraToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,20 +79,14 @@ namespace WindowsFormsApp1
             System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-          
-        }
+      
 
         private static List<LogEntry> filterDates(List<LogEntry> l, DateTime day)
         {
             return l.Where(item => item.Time.Date.CompareTo(day.Date) == 0).ToList();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-          
-        }
+       
 
 
         private void button3_Click(object sender, EventArgs e)
@@ -114,32 +95,29 @@ namespace WindowsFormsApp1
             UpdateListBoxWithAllLogEntries(db);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-           
-                Console.WriteLine(monthCalendar1.SelectionStart);
-
+        { 
                 var db = new SQLiteConnection("diary");
                 List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
                 List<LogEntry> filteredList;
                 DateTime selectedDate = monthCalendar1.SelectionStart;
                 filteredList = filterDates(allLogEntries, selectedDate);
-                listBox1.DataSource = filteredList;
-            
+                listBox1.DataSource = filteredList;  
         }
 
-        private void label1_Click_2(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> listWithAllLogentreis = db.Query<LogEntry>("select * from LogEntry order by time DESC");
+            var exportFile = new StreamWriter(exportFileName, false, System.Text.Encoding.UTF8);
+
+            foreach (LogEntry logEntry in listWithAllLogentreis)
+            {
+                exportFile.WriteLine(logEntry.ExportToFileFormat());
+            }
+
+            exportFile.Close();
+            Process.Start(exportFileName);
 
         }
     }

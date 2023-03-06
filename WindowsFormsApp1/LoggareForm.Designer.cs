@@ -38,6 +38,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,6 @@
             this.txtBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtBoxLog.Size = new System.Drawing.Size(545, 171);
             this.txtBoxLog.TabIndex = 1;
-            this.txtBoxLog.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // listBox1
             // 
@@ -84,7 +84,6 @@
             this.taBortToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(202, 52);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // kopieraToolStripMenuItem
             // 
@@ -120,7 +119,6 @@
             this.label1.Size = new System.Drawing.Size(126, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Loggar valt datum:";
-            this.label1.Click += new System.EventHandler(this.label1_Click_2);
             // 
             // monthCalendar1
             // 
@@ -129,11 +127,22 @@
             this.monthCalendar1.TabIndex = 9;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(700, 386);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Exportera alla";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(901, 491);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
@@ -160,6 +169,7 @@
         private System.Windows.Forms.ToolStripMenuItem kopieraToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

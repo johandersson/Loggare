@@ -20,5 +20,10 @@ namespace WindowsFormsApp1
         {
             return Time.ToString("yyyy-MM-dd HH:mm:ss");
         }
+
+        public string ExportToFileFormat()
+        {
+            return ToString() + " " + Entry;
+        }
     }
 }
