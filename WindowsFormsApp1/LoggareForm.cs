@@ -71,10 +71,13 @@ namespace WindowsFormsApp1
         private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var db = new SQLiteConnection(DatabasePath);
-            DialogResult deleteAnswer = MessageBox.Show("Ta bort logg?", "Vill du ta bort loggen?", MessageBoxButtons.YesNo);
+            LogEntry entry = listBox1.SelectedItem as LogEntry;
+            var truncatedEntry = new string(entry.Entry.Take(200).ToArray());
+            DialogResult deleteAnswer = MessageBox.Show("Följande logg kommer att raderas:" + Environment.NewLine 
+                + Environment.NewLine + entry.Time 
+                + Environment.NewLine + Environment.NewLine + truncatedEntry + "...", "Vill du ta bort loggen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(deleteAnswer == DialogResult.Yes)
             {
-                LogEntry entry = listBox1.SelectedItem as LogEntry;
                 db.Delete<LogEntry>(entry.Id);
                 UpdateListBoxWithAllLogEntries(db);
                 UpdateBoldedDates();
