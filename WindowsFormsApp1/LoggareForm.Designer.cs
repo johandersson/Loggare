@@ -54,7 +54,7 @@
             this.btnSave.Location = new System.Drawing.Point(461, 211);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(100, 37);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Logga!";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -129,15 +129,17 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(574, 32);
+            this.monthCalendar1.MaxDate = new System.DateTime(2123, 1, 1, 15, 37, 0, 0);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 9;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(749, 417);
+            this.saveButton.Location = new System.Drawing.Point(754, 416);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(75, 35);
             this.saveButton.TabIndex = 11;
             this.saveButton.Text = "Spara";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -169,27 +171,27 @@
             this.valtDatumToolStripMenuItem,
             this.allaDatumToolStripMenuItem});
             this.exporteraToolStripMenuItem.Name = "exporteraToolStripMenuItem";
-            this.exporteraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exporteraToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.exporteraToolStripMenuItem.Text = "Exportera";
             // 
             // valtDatumToolStripMenuItem
             // 
             this.valtDatumToolStripMenuItem.Name = "valtDatumToolStripMenuItem";
-            this.valtDatumToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.valtDatumToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.valtDatumToolStripMenuItem.Text = "Valt datum";
             this.valtDatumToolStripMenuItem.Click += new System.EventHandler(this.ExportLogForSpecificDate);
             // 
             // allaDatumToolStripMenuItem
             // 
             this.allaDatumToolStripMenuItem.Name = "allaDatumToolStripMenuItem";
-            this.allaDatumToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.allaDatumToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.allaDatumToolStripMenuItem.Text = "Alla datum";
             this.allaDatumToolStripMenuItem.Click += new System.EventHandler(this.ExportAllLogs);
             // 
             // omLoggareToolStripMenuItem
             // 
             this.omLoggareToolStripMenuItem.Name = "omLoggareToolStripMenuItem";
-            this.omLoggareToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.omLoggareToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.omLoggareToolStripMenuItem.Text = "Om Loggare";
             this.omLoggareToolStripMenuItem.Click += new System.EventHandler(this.AboutProgram);
             // 

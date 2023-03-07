@@ -14,20 +14,21 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         private const string exportFileName = "export-loggar.txt";
+        private const string DatabasePath = "diary";
 
         public Form1()
         {
             InitializeComponent();
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             db.CreateTable<LogEntry>();
             UpdateBoldedDates();
             UpdateListBoxWithAllLogEntries(db);
+            monthCalendar1.MaxDate = DateTime.Today;
         }
 
         private void UpdateBoldedDates()
         {
-            var db = new SQLiteConnection("diary");
-            List<LogEntry> l = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            var db = new SQLiteConnection(DatabasePath);
             List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
             List<DateTime> boldedDates = new List<DateTime>();
             foreach (LogEntry logEntry in listWithAllLogEntries)
@@ -47,8 +48,9 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            monthCalendar1.SetDate(DateTime.Today);
             String s = txtBoxLog.Text;
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             var Id = db.Insert(new LogEntry()
             {
                 Entry = s,
@@ -68,17 +70,23 @@ namespace WindowsFormsApp1
 
         private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
-            LogEntry entry = listBox1.SelectedItem as LogEntry;
-            db.Delete<LogEntry>(entry.Id);
-            UpdateListBoxWithAllLogEntries(db);
-            UpdateBoldedDates();
+            var db = new SQLiteConnection(DatabasePath);
+            DialogResult deleteAnswer = MessageBox.Show("Ta bort logg?", "Vill du ta bort loggen?", MessageBoxButtons.YesNo);
+            if(deleteAnswer == DialogResult.Yes)
+            {
+                LogEntry entry = listBox1.SelectedItem as LogEntry;
+                db.Delete<LogEntry>(entry.Id);
+                UpdateListBoxWithAllLogEntries(db);
+                UpdateBoldedDates();
+            }
+
         }
 
         private void kopieraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
+            MessageBox.Show("Loggen är kopierad till urklipp", "Kopierad till urklipp", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
       
@@ -90,7 +98,7 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             UpdateListBoxWithAllLogEntries(db);
         }
 
@@ -99,11 +107,15 @@ namespace WindowsFormsApp1
             List<LogEntry> logEntryForSelectedDate = GetLogEntryForDateSelecedInCalendar();
             listBox1.DataSource = logEntryForSelectedDate;
             logEntryBox.Text = "";
+            if (listBox1.Items.Count > 0)
+            {
+                listBox1_SelectedIndexChanged(sender, e);
+            } 
         }
 
         private List<LogEntry> GetLogEntryForDateSelecedInCalendar()
         {
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
             List<LogEntry> filteredList;
             DateTime selectedDate = monthCalendar1.SelectionStart;
@@ -113,7 +125,7 @@ namespace WindowsFormsApp1
 
         private void ExportAllLogs(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by time DESC");
             ExportLogEntries(listWithAllLogEntries);
 
@@ -140,7 +152,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection("diary");
+            var db = new SQLiteConnection(DatabasePath);
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             entry.Entry = logEntryBox.Text;
             db.Update(entry);
