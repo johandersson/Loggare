@@ -95,30 +95,47 @@ namespace WindowsFormsApp1
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        { 
-                var db = new SQLiteConnection("diary");
-                List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-                List<LogEntry> filteredList;
-                DateTime selectedDate = monthCalendar1.SelectionStart;
-                filteredList = filterDates(allLogEntries, selectedDate);
-                listBox1.DataSource = filteredList;
-                logEntryBox.Text = "";
+        {
+            List<LogEntry> logEntryForSelectedDate = GetLogEntryForDateSelecedInCalendar();
+            listBox1.DataSource = logEntryForSelectedDate;
+            logEntryBox.Text = "";
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private List<LogEntry> GetLogEntryForDateSelecedInCalendar()
         {
             var db = new SQLiteConnection("diary");
-            List<LogEntry> listWithAllLogentreis = db.Query<LogEntry>("select * from LogEntry order by time DESC");
+            List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            List<LogEntry> filteredList;
+            DateTime selectedDate = monthCalendar1.SelectionStart;
+            filteredList = filterDates(allLogEntries, selectedDate);
+            return filteredList;
+        }
+
+        private void ExportAllLogs(object sender, EventArgs e)
+        {
+            var db = new SQLiteConnection("diary");
+            List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by time DESC");
+            ExportLogEntries(listWithAllLogEntries);
+
+        }
+
+        private static void ExportLogEntries(List<LogEntry> listWithAllLogEntries)
+        {
             var exportFile = new StreamWriter(exportFileName, false, System.Text.Encoding.UTF8);
 
-            foreach (LogEntry logEntry in listWithAllLogentreis)
+            foreach (LogEntry logEntry in listWithAllLogEntries)
             {
                 exportFile.WriteLine(logEntry.ExportToFileFormat());
             }
 
             exportFile.Close();
             Process.Start(exportFileName);
+        }
 
+        private void ExportLogForSpecificDate(object sender, EventArgs e)
+        {
+            List<LogEntry> logEntriesForSelectedDateInCalendar = GetLogEntryForDateSelecedInCalendar();
+            ExportLogEntries(logEntriesForSelectedDateInCalendar);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -127,6 +144,11 @@ namespace WindowsFormsApp1
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             entry.Entry = logEntryBox.Text;
             db.Update(entry);
+        }
+
+        private void AboutProgram(object sender, EventArgs e)
+        {
+            MessageBox.Show("Copyright: Johan Andersson. Licens: MIT. Använder kod från sqlite-net (MIT License).", "Om Loggare");
         }
     }
 }

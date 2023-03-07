@@ -38,14 +38,20 @@
             this.logEntryBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.button1 = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.arkivToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exporteraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.valtDatumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allaDatumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.omLoggareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(461, 194);
+            this.btnSave.Location = new System.Drawing.Point(461, 211);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
@@ -57,7 +63,7 @@
             // txtBoxLog
             // 
             this.txtBoxLog.Font = new System.Drawing.Font("Gentium Book Basic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxLog.Location = new System.Drawing.Point(16, 15);
+            this.txtBoxLog.Location = new System.Drawing.Point(16, 32);
             this.txtBoxLog.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxLog.Multiline = true;
             this.txtBoxLog.Name = "txtBoxLog";
@@ -122,20 +128,10 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(574, 15);
+            this.monthCalendar1.Location = new System.Drawing.Point(574, 32);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 9;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(700, 224);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Exportera alla";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // saveButton
             // 
@@ -147,23 +143,76 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.button2_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.arkivToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(901, 28);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // arkivToolStripMenuItem
+            // 
+            this.arkivToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exporteraToolStripMenuItem,
+            this.omLoggareToolStripMenuItem});
+            this.arkivToolStripMenuItem.Name = "arkivToolStripMenuItem";
+            this.arkivToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.arkivToolStripMenuItem.Text = "Arkiv";
+            // 
+            // exporteraToolStripMenuItem
+            // 
+            this.exporteraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.valtDatumToolStripMenuItem,
+            this.allaDatumToolStripMenuItem});
+            this.exporteraToolStripMenuItem.Name = "exporteraToolStripMenuItem";
+            this.exporteraToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exporteraToolStripMenuItem.Text = "Exportera";
+            // 
+            // valtDatumToolStripMenuItem
+            // 
+            this.valtDatumToolStripMenuItem.Name = "valtDatumToolStripMenuItem";
+            this.valtDatumToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.valtDatumToolStripMenuItem.Text = "Valt datum";
+            this.valtDatumToolStripMenuItem.Click += new System.EventHandler(this.ExportLogForSpecificDate);
+            // 
+            // allaDatumToolStripMenuItem
+            // 
+            this.allaDatumToolStripMenuItem.Name = "allaDatumToolStripMenuItem";
+            this.allaDatumToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.allaDatumToolStripMenuItem.Text = "Alla datum";
+            this.allaDatumToolStripMenuItem.Click += new System.EventHandler(this.ExportAllLogs);
+            // 
+            // omLoggareToolStripMenuItem
+            // 
+            this.omLoggareToolStripMenuItem.Name = "omLoggareToolStripMenuItem";
+            this.omLoggareToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.omLoggareToolStripMenuItem.Text = "Om Loggare";
+            this.omLoggareToolStripMenuItem.Click += new System.EventHandler(this.AboutProgram);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 491);
+            this.ClientSize = new System.Drawing.Size(901, 571);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.logEntryBox);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.txtBoxLog);
             this.Controls.Add(this.btnSave);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Loggare";
             this.contextMenuStrip1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,8 +229,13 @@
         private System.Windows.Forms.ToolStripMenuItem kopieraToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem arkivToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exporteraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem valtDatumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allaDatumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem omLoggareToolStripMenuItem;
     }
 }
 
