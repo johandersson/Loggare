@@ -22,7 +22,8 @@ Alla datum som har loggar markeras i kalendern med fetstil. Klicka på ett datum
 
 ## Exportera
 
-För att exportera loggar för ett specifikt datum, välj datum i kalendern, klicka på menyn Arkiv -> Export -> Valt datum. För att exportera alla loggar klicka på menyn Arkiv -> Alla datum. Exporten sker till en text-fil som öppnas i Windows Anteckningar. 
+- För att exportera loggar för ett specifikt datum, välj datum i kalendern, klicka på menyn Arkiv -> Export -> Valt datum. 
+- För att exportera alla loggar klicka på menyn Arkiv -> Alla datum. Exporten sker till en text-fil som öppnas i Windows Anteckningar. 
 
 # Planerad kommande funktionalitet
 - Logga på historiska datum
