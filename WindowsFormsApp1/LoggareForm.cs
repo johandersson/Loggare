@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Loggare;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,54 +12,74 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class LoggareForm : Form
     {
         private const string exportFileName = "export-loggar.txt";
         private const string DatabasePath = "diary";
-
-        public Form1()
+        private const string queryToSelectAllLogEntries = "select * from LogEntry order by id DESC";
+        private HistoricDateTimePicker HISTORIC_DATEPICKER_INST;
+        BindingList<LogEntry> logEntries;
+        SQLiteConnection db;
+        public LoggareForm()
         {
             InitializeComponent();
-            var db = new SQLiteConnection(DatabasePath);
+
+            db = new SQLiteConnection(DatabasePath);
             db.CreateTable<LogEntry>();
+            ReadAllLogEntriesFromDB();
+            
             UpdateBoldedDates();
-            UpdateListBoxWithAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries();
             monthCalendar1.MaxDate = DateTime.Today;
+          
+        }
+
+        public void ReadAllLogEntriesFromDB()
+        {
+            logEntries = new BindingList<LogEntry>(db.Query<LogEntry>(queryToSelectAllLogEntries));
         }
 
         private void UpdateBoldedDates()
         {
-            var db = new SQLiteConnection(DatabasePath);
-            List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
+            logEntries = new BindingList<LogEntry>(db.Query<LogEntry>(queryToSelectAllLogEntries));
             List<DateTime> boldedDates = new List<DateTime>();
-            foreach (LogEntry logEntry in listWithAllLogEntries)
+            foreach (LogEntry logEntry in logEntries)
             {
                 boldedDates.Add(logEntry.Time);
             }
             monthCalendar1.BoldedDates = boldedDates.ToArray();
         }
 
-        private void UpdateListBoxWithAllLogEntries(SQLiteConnection db)
+        private void UpdateListBoxWithAllLogEntries()
         {
-            List<LogEntry> allLogentries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
             DateTime selectedDate = monthCalendar1.SelectionStart;
-            var filteredList = filterDates(allLogentries, selectedDate);
+            logEntries = new BindingList<LogEntry>(db.Query<LogEntry>(queryToSelectAllLogEntries));
+            var filteredList = filterDates(logEntries, selectedDate);
             listBox1.DataSource = filteredList;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            monthCalendar1.SetDate(DateTime.Today);
             String s = txtBoxLog.Text;
-            var db = new SQLiteConnection(DatabasePath);
-            var Id = db.Insert(new LogEntry()
+            var logEntryToAdd = new LogEntry();
+            if (monthCalendar1.SelectionStart == DateTime.Today)
             {
-                Entry = s,
-                Time = DateTime.Now
-            });
+                logEntryToAdd = new LogEntry(){ Entry=s, Time=DateTime.Now};
+            }
+            else
+            {
+                logEntryToAdd = new LogEntry()
+                {
+                    Entry = s,
+                    Time = monthCalendar1.SelectionStart
+                };
+            }
+
+
+            var Id = db.Insert(logEntryToAdd); 
            
             txtBoxLog.Text = "";
-            UpdateListBoxWithAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries();
         }
 
    
@@ -70,7 +91,6 @@ namespace WindowsFormsApp1
 
         private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection(DatabasePath);
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             var truncatedEntry = new string(entry.Entry.Take(200).ToArray());
             DialogResult deleteAnswer = MessageBox.Show("Följande logg kommer att raderas:" + Environment.NewLine 
@@ -79,7 +99,7 @@ namespace WindowsFormsApp1
             if(deleteAnswer == DialogResult.Yes)
             {
                 db.Delete<LogEntry>(entry.Id);
-                UpdateListBoxWithAllLogEntries(db);
+                UpdateListBoxWithAllLogEntries();
                 UpdateBoldedDates();
             }
 
@@ -94,7 +114,7 @@ namespace WindowsFormsApp1
 
       
 
-        private static List<LogEntry> filterDates(List<LogEntry> l, DateTime day)
+        private static List<LogEntry> filterDates(BindingList<LogEntry> l, DateTime day)
         {
             return l.Where(item => item.Time.Date.CompareTo(day.Date) == 0).ToList();
         }
@@ -102,12 +122,12 @@ namespace WindowsFormsApp1
         private void button3_Click(object sender, EventArgs e)
         {
             var db = new SQLiteConnection(DatabasePath);
-            UpdateListBoxWithAllLogEntries(db);
+            UpdateListBoxWithAllLogEntries();
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            List<LogEntry> logEntryForSelectedDate = GetLogEntryForDateSelecedInCalendar();
+            List<LogEntry> logEntryForSelectedDate = GetLogEntriesForDateSelecedInCalendar(logEntries);
             listBox1.DataSource = logEntryForSelectedDate;
             logEntryBox.Text = "";
             if (listBox1.Items.Count > 0)
@@ -116,22 +136,14 @@ namespace WindowsFormsApp1
             } 
         }
 
-        private List<LogEntry> GetLogEntryForDateSelecedInCalendar()
+        private List<LogEntry> GetLogEntriesForDateSelecedInCalendar(BindingList<LogEntry> l)
         {
-            var db = new SQLiteConnection(DatabasePath);
-            List<LogEntry> allLogEntries = db.Query<LogEntry>("select * from LogEntry order by id DESC");
-            List<LogEntry> filteredList;
-            DateTime selectedDate = monthCalendar1.SelectionStart;
-            filteredList = filterDates(allLogEntries, selectedDate);
-            return filteredList;
+            return l.Where(item => item.Time.Date.CompareTo(monthCalendar1.SelectionStart) == 0).ToList();
         }
 
         private void ExportAllLogs(object sender, EventArgs e)
-        {
-            var db = new SQLiteConnection(DatabasePath);
-            List<LogEntry> listWithAllLogEntries = db.Query<LogEntry>("select * from LogEntry order by time DESC");
-            ExportLogEntries(listWithAllLogEntries);
-
+        { 
+            ExportLogEntries(logEntries.ToList());
         }
 
         private static void ExportLogEntries(List<LogEntry> listWithAllLogEntries)
@@ -149,13 +161,12 @@ namespace WindowsFormsApp1
 
         private void ExportLogForSpecificDate(object sender, EventArgs e)
         {
-            List<LogEntry> logEntriesForSelectedDateInCalendar = GetLogEntryForDateSelecedInCalendar();
+            List<LogEntry> logEntriesForSelectedDateInCalendar = GetLogEntriesForDateSelecedInCalendar(logEntries).ToList();
             ExportLogEntries(logEntriesForSelectedDateInCalendar);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var db = new SQLiteConnection(DatabasePath);
             LogEntry entry = listBox1.SelectedItem as LogEntry;
             entry.Entry = logEntryBox.Text;
             db.Update(entry);
@@ -164,6 +175,40 @@ namespace WindowsFormsApp1
         private void AboutProgram(object sender, EventArgs e)
         {
             MessageBox.Show("Copyright: Johan Andersson. Licens: MIT. Använder kod från sqlite-net (MIT License).", "Om Loggare");
+        }
+
+       
+
+        private void ändraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LogEntry pickedLogEntry = listBox1.SelectedItem as LogEntry;
+            if (HISTORIC_DATEPICKER_INST == null)
+            {
+                HISTORIC_DATEPICKER_INST = new HistoricDateTimePicker(pickedLogEntry, this);
+                HISTORIC_DATEPICKER_INST.FormClosing += new FormClosingEventHandler(HISTORIC_DATEPICKER_INST_FormClosing);
+            }
+
+            HISTORIC_DATEPICKER_INST.Show();
+            if (Form.ActiveForm != HISTORIC_DATEPICKER_INST)
+            {
+                HISTORIC_DATEPICKER_INST.Activate();
+            }
+        }
+
+        void HISTORIC_DATEPICKER_INST_FormClosing(object sender, FormClosingEventArgs e)
+        {
+          
+            HISTORIC_DATEPICKER_INST = null;
+        }
+
+        public void setDateTimeForListBoxItem(DateTime dateTime)
+        {
+            LogEntry l = listBox1.SelectedItem as LogEntry;
+            l.Time = dateTime;
+            db.Update(l);
+            monthCalendar1.SetDate(dateTime);
+            UpdateListBoxWithAllLogEntries();
+            UpdateBoldedDates();
         }
     }
 }

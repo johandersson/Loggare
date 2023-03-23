@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    class LogEntry
+    public class LogEntry
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

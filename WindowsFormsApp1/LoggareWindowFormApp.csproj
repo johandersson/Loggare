@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoricDateTimePicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoricDateTimePicker.Designer.cs">
+      <DependentUpon>HistoricDateTimePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoggareForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="LogEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="HistoricDateTimePicker.resx">
+      <DependentUpon>HistoricDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoggareForm.resx">
       <DependentUpon>LoggareForm.cs</DependentUpon>
     </EmbeddedResource>

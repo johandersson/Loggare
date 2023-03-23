@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class LoggareForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,9 @@
             this.txtBoxLog = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ändraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kopieraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.taBortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logEntryBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -87,22 +89,36 @@
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ändraToolStripMenuItem,
             this.kopieraToolStripMenuItem,
+            this.toolStripSeparator1,
             this.taBortToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(202, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 110);
+            // 
+            // ändraToolStripMenuItem
+            // 
+            this.ändraToolStripMenuItem.Name = "ändraToolStripMenuItem";
+            this.ändraToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ändraToolStripMenuItem.Text = "Ändra";
+            this.ändraToolStripMenuItem.Click += new System.EventHandler(this.ändraToolStripMenuItem_Click);
             // 
             // kopieraToolStripMenuItem
             // 
             this.kopieraToolStripMenuItem.Name = "kopieraToolStripMenuItem";
-            this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.kopieraToolStripMenuItem.Text = "Kopiera till urklipp";
             this.kopieraToolStripMenuItem.Click += new System.EventHandler(this.kopieraToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // taBortToolStripMenuItem
             // 
             this.taBortToolStripMenuItem.Name = "taBortToolStripMenuItem";
-            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
+            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.taBortToolStripMenuItem.Text = "Ta bort";
             this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
             // 
@@ -153,7 +169,7 @@
             this.arkivToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(901, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(901, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -239,6 +255,8 @@
         private System.Windows.Forms.ToolStripMenuItem valtDatumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allaDatumToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem omLoggareToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ändraToolStripMenuItem;
     }
 }
 
