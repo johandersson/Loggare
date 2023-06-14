@@ -18,6 +18,7 @@ Alla datum som har loggar markeras i kalendern med fetstil. Klicka på ett datum
 
 ## Editera och ta bort en logg
 - För att editera loggarna, klicka i den nedre textrutan, skriv och klicka sedan på Spara.
+- För att ändra datum och tid på en logg högerklicka på en logg i listan till vänster och välj ändra. Ett fönster kommer upp där du kan editera tiden. Tryck på Spara.
 - För att ta bort en logg, högerklicka på en logg i listan välj Ta bort.
 
 ## Exportera
@@ -26,7 +27,6 @@ Alla datum som har loggar markeras i kalendern med fetstil. Klicka på ett datum
 - För att exportera alla loggar klicka på menyn Arkiv -> Alla datum. Exporten sker till en text-fil som öppnas i Windows Anteckningar. 
 
 # Planerad kommande funktionalitet
-- Logga på historiska datum
 - Exportera till Word-fil.
 
 # Licens
