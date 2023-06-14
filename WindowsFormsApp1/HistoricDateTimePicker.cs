@@ -22,7 +22,7 @@ namespace Loggare
             this.logEntryToChange = logEntryToChange;
             InitializeComponent();
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dateTimePicker1.Value = logEntryToChange.Time;
             dateTimePicker1.MaxDate = DateTime.Today; 
             this.parentForm = callingForm;
