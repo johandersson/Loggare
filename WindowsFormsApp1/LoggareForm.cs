@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-
 namespace WindowsFormsApp1
 {
     public partial class LoggareForm : Form
@@ -20,18 +19,25 @@ namespace WindowsFormsApp1
         private HistoricDateTimePicker HISTORIC_DATEPICKER_INST;
         BindingList<LogEntry> logEntries;
         SQLiteConnection db;
+
         public LoggareForm()
         {
             InitializeComponent();
 
-            db = new SQLiteConnection(DatabasePath);
-            db.CreateTable<LogEntry>();
-            ReadAllLogEntriesFromDB();
-            
-            UpdateBoldedDates();
-            UpdateListBoxWithAllLogEntries();
-            monthCalendar1.MaxDate = DateTime.Today;
-          
+            try
+            {
+                db = new SQLiteConnection(DatabasePath);
+                db.CreateTable<LogEntry>();
+                ReadAllLogEntriesFromDB();
+
+                UpdateBoldedDates();
+                UpdateListBoxWithAllLogEntries();
+                monthCalendar1.MaxDate = DateTime.Today;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while initializing the database: " + ex.Message);
+            }
         }
 
         public void ReadAllLogEntriesFromDB()
@@ -64,7 +70,7 @@ namespace WindowsFormsApp1
             var logEntryToAdd = new LogEntry();
             if (monthCalendar1.SelectionStart == DateTime.Today)
             {
-                logEntryToAdd = new LogEntry(){ Entry=s, Time=DateTime.Now};
+                logEntryToAdd = new LogEntry() { Entry = s, Time = DateTime.Now };
             }
             else
             {
@@ -75,44 +81,57 @@ namespace WindowsFormsApp1
                 };
             }
 
+            var Id = db.Insert(logEntryToAdd);
 
-            var Id = db.Insert(logEntryToAdd); 
-           
             txtBoxLog.Text = "";
             UpdateListBoxWithAllLogEntries();
         }
 
-   
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LogEntry entry = listBox1.SelectedItem as LogEntry;
-            logEntryBox.Text = entry.Entry;
+            if (listBox1.SelectedItem != null)
+            {
+                LogEntry entry = listBox1.SelectedItem as LogEntry;
+                if (entry != null)
+                {
+                    logEntryBox.Text = entry.Entry;
+                }
+            }
         }
 
         private void taBortToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogEntry entry = listBox1.SelectedItem as LogEntry;
-            var truncatedEntry = new string(entry.Entry.Take(200).ToArray());
-            DialogResult deleteAnswer = MessageBox.Show("Följande logg kommer att raderas:" + Environment.NewLine 
-                + Environment.NewLine + entry.Time 
-                + Environment.NewLine + Environment.NewLine + truncatedEntry + "...", "Vill du ta bort loggen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(deleteAnswer == DialogResult.Yes)
+            if (listBox1.SelectedItem != null)
             {
-                db.Delete<LogEntry>(entry.Id);
-                UpdateListBoxWithAllLogEntries();
-                UpdateBoldedDates();
+                LogEntry entry = listBox1.SelectedItem as LogEntry;
+                if (entry != null)
+                {
+                    var truncatedEntry = new string(entry.Entry.Take(200).ToArray());
+                    DialogResult deleteAnswer = MessageBox.Show("Följande logg kommer att raderas:" + Environment.NewLine
+                        + Environment.NewLine + entry.Time
+                        + Environment.NewLine + Environment.NewLine + truncatedEntry + "...", "Vill du ta bort loggen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (deleteAnswer == DialogResult.Yes)
+                    {
+                        db.Delete<LogEntry>(entry.Id);
+                        UpdateListBoxWithAllLogEntries();
+                        UpdateBoldedDates();
+                    }
+                }
             }
-
         }
 
         private void kopieraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogEntry entry = listBox1.SelectedItem as LogEntry;
-            System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
-            MessageBox.Show("Loggen är kopierad till urklipp", "Kopierad till urklipp", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (listBox1.SelectedItem != null)
+            {
+                LogEntry entry = listBox1.SelectedItem as LogEntry;
+                if (entry != null)
+                {
+                    System.Windows.Forms.Clipboard.SetText(entry.Time + " " + entry.Entry);
+                    MessageBox.Show("Loggen är kopierad till urklipp", "Kopierad till urklipp", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
-
-      
 
         private static List<LogEntry> filterDates(BindingList<LogEntry> l, DateTime day)
         {
@@ -133,7 +152,7 @@ namespace WindowsFormsApp1
             if (listBox1.Items.Count > 0)
             {
                 listBox1_SelectedIndexChanged(sender, e);
-            } 
+            }
         }
 
         private List<LogEntry> GetLogEntriesForDateSelecedInCalendar(BindingList<LogEntry> l)
@@ -142,7 +161,7 @@ namespace WindowsFormsApp1
         }
 
         private void ExportAllLogs(object sender, EventArgs e)
-        { 
+        {
             ExportLogEntries(logEntries.ToList());
         }
 
@@ -167,9 +186,15 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            LogEntry entry = listBox1.SelectedItem as LogEntry;
-            entry.Entry = logEntryBox.Text;
-            db.Update(entry);
+            if (listBox1.SelectedItem != null)
+            {
+                LogEntry entry = listBox1.SelectedItem as LogEntry;
+                if (entry != null)
+                {
+                    entry.Entry = logEntryBox.Text;
+                    db.Update(entry);
+                }
+            }
         }
 
         private void AboutProgram(object sender, EventArgs e)
@@ -177,38 +202,44 @@ namespace WindowsFormsApp1
             MessageBox.Show("Copyright: Johan Andersson. Licens: MIT. Använder kod från sqlite-net (MIT License).", "Om Loggare");
         }
 
-       
-
         private void ändraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogEntry pickedLogEntry = listBox1.SelectedItem as LogEntry;
-            if (HISTORIC_DATEPICKER_INST == null)
+            if (listBox1.SelectedItem != null)
             {
-                HISTORIC_DATEPICKER_INST = new HistoricDateTimePicker(pickedLogEntry, this);
-                HISTORIC_DATEPICKER_INST.FormClosing += new FormClosingEventHandler(HISTORIC_DATEPICKER_INST_FormClosing);
-            }
+                LogEntry pickedLogEntry = listBox1.SelectedItem as LogEntry;
+                if (HISTORIC_DATEPICKER_INST == null)
+                {
+                    HISTORIC_DATEPICKER_INST = new HistoricDateTimePicker(pickedLogEntry, this);
+                    HISTORIC_DATEPICKER_INST.FormClosing += new FormClosingEventHandler(HISTORIC_DATEPICKER_INST_FormClosing);
+                }
 
-            HISTORIC_DATEPICKER_INST.Show();
-            if (Form.ActiveForm != HISTORIC_DATEPICKER_INST)
-            {
-                HISTORIC_DATEPICKER_INST.Activate();
+                HISTORIC_DATEPICKER_INST.Show();
+                if (Form.ActiveForm != HISTORIC_DATEPICKER_INST)
+                {
+                    HISTORIC_DATEPICKER_INST.Activate();
+                }
             }
         }
 
         void HISTORIC_DATEPICKER_INST_FormClosing(object sender, FormClosingEventArgs e)
         {
-          
             HISTORIC_DATEPICKER_INST = null;
         }
 
         public void setDateTimeForListBoxItem(DateTime dateTime)
         {
-            LogEntry l = listBox1.SelectedItem as LogEntry;
-            l.Time = dateTime;
-            db.Update(l);
-            monthCalendar1.SetDate(dateTime);
-            UpdateListBoxWithAllLogEntries();
-            UpdateBoldedDates();
+            if (listBox1.SelectedItem != null)
+            {
+                LogEntry l = listBox1.SelectedItem as LogEntry;
+                if (l != null)
+                {
+                    l.Time = dateTime;
+                    db.Update(l);
+                    monthCalendar1.SetDate(dateTime);
+                    UpdateListBoxWithAllLogEntries();
+                    UpdateBoldedDates();
+                }
+            }
         }
     }
 }
