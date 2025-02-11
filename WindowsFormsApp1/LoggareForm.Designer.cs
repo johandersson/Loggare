@@ -94,31 +94,31 @@
             this.toolStripSeparator1,
             this.taBortToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 110);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(202, 82);
             // 
             // ändraToolStripMenuItem
             // 
             this.ändraToolStripMenuItem.Name = "ändraToolStripMenuItem";
-            this.ändraToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.ändraToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
             this.ändraToolStripMenuItem.Text = "Ändra";
             this.ändraToolStripMenuItem.Click += new System.EventHandler(this.ändraToolStripMenuItem_Click);
             // 
             // kopieraToolStripMenuItem
             // 
             this.kopieraToolStripMenuItem.Name = "kopieraToolStripMenuItem";
-            this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
             this.kopieraToolStripMenuItem.Text = "Kopiera till urklipp";
             this.kopieraToolStripMenuItem.Click += new System.EventHandler(this.kopieraToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
             // 
             // taBortToolStripMenuItem
             // 
             this.taBortToolStripMenuItem.Name = "taBortToolStripMenuItem";
-            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.taBortToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
             this.taBortToolStripMenuItem.Text = "Ta bort";
             this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
             // 
@@ -139,7 +139,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(13, 264);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 17);
+            this.label1.Size = new System.Drawing.Size(135, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Loggar valt datum:";
             // 
@@ -212,7 +212,7 @@
             this.omLoggareToolStripMenuItem.Text = "Om Loggare";
             this.omLoggareToolStripMenuItem.Click += new System.EventHandler(this.AboutProgram);
             // 
-            // Form1
+            // LoggareForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -227,7 +227,7 @@
             this.Controls.Add(this.btnSave);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Form1";
+            this.Name = "LoggareForm";
             this.Text = "Loggare";
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

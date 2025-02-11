@@ -33,11 +33,20 @@ namespace WindowsFormsApp1
                 UpdateBoldedDates();
                 UpdateListBoxWithAllLogEntries();
                 monthCalendar1.MaxDate = DateTime.Today;
+
+                logEntryBox.TextChanged += new EventHandler(txtBoxLog_TextChanged);
+                saveButton.Enabled = false; // Disable the "Spara" button initially
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred while initializing the database: " + ex.Message);
             }
+        }
+
+        private void txtBoxLog_TextChanged(object sender, EventArgs e)
+        {
+            // Enable the "Spara" button only if the textbox is not empty
+            saveButton.Enabled = !string.IsNullOrWhiteSpace(logEntryBox.Text);
         }
 
         public void ReadAllLogEntriesFromDB()
