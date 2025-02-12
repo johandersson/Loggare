@@ -24,7 +24,7 @@ namespace Loggare
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dateTimePicker1.Value = logEntryToChange.Time;
-            dateTimePicker1.MaxDate = DateTime.Today; 
+            dateTimePicker1.MaxDate = DateTime.Now;
             this.parentForm = callingForm;
         }
 
@@ -35,9 +35,8 @@ namespace Loggare
 
         private void changeDateOKButton_Click(object sender, EventArgs e)
         {
-        
-           this.parentForm.setDateTimeForListBoxItem(dateTimePicker1.Value);
-           this.Close();
+            this.parentForm.setDateTimeForListBoxItem(dateTimePicker1.Value);
+            this.Close();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

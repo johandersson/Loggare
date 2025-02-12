@@ -244,7 +244,8 @@ namespace WindowsFormsApp1
                 {
                     l.Time = dateTime;
                     db.Update(l);
-                    monthCalendar1.SetDate(dateTime);
+                    DateTime dateOnly = dateTime.Date; // Ensure time component is 00:00:00
+                    monthCalendar1.SetDate(dateOnly);
                     UpdateListBoxWithAllLogEntries();
                     UpdateBoldedDates();
                 }
