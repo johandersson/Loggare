@@ -25,6 +25,8 @@ namespace Loggare
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dateTimePicker1.Value = logEntryToChange.Time;
             dateTimePicker1.MaxDate = DateTime.Now;
+            //set window title to Ändra datum och tid för logg: <datum>
+            this.Text = "Ändra datum och tid för logg";
             this.parentForm = callingForm;
         }
 

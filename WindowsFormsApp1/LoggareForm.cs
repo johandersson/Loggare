@@ -43,6 +43,17 @@ namespace WindowsFormsApp1
             }
         }
 
+        //make cotrol + s save in the log entry box
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                button1_Click(null, null);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void txtBoxLog_TextChanged(object sender, EventArgs e)
         {
             // Enable the "Spara" button only if the textbox is not empty

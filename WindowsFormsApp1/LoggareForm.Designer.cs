@@ -100,14 +100,14 @@
             // 
             this.ändraToolStripMenuItem.Name = "ändraToolStripMenuItem";
             this.ändraToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-            this.ändraToolStripMenuItem.Text = "Ändra";
+            this.ändraToolStripMenuItem.Text = "Ändra datum/tid";
             this.ändraToolStripMenuItem.Click += new System.EventHandler(this.ändraToolStripMenuItem_Click);
             // 
             // kopieraToolStripMenuItem
             // 
             this.kopieraToolStripMenuItem.Name = "kopieraToolStripMenuItem";
             this.kopieraToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-            this.kopieraToolStripMenuItem.Text = "Kopiera till urklipp";
+            this.kopieraToolStripMenuItem.Text = "Kopiera logg till urklipp";
             this.kopieraToolStripMenuItem.Click += new System.EventHandler(this.kopieraToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -119,7 +119,7 @@
             // 
             this.taBortToolStripMenuItem.Name = "taBortToolStripMenuItem";
             this.taBortToolStripMenuItem.Size = new System.Drawing.Size(201, 24);
-            this.taBortToolStripMenuItem.Text = "Ta bort";
+            this.taBortToolStripMenuItem.Text = "Ta bort logg";
             this.taBortToolStripMenuItem.Click += new System.EventHandler(this.taBortToolStripMenuItem_Click);
             // 
             // logEntryBox
